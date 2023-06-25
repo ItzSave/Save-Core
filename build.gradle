@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow") version '8.1.1'
+    id io.papermc.paperweight.userdev") version "1.5.5"
+}
+
+group = 'org'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = 17
+
+repositories {
+    mavenCentral()
+    maven { url = "https://repo.papermc.io/repository/maven-public/" }
+}
+
+dependencies {
+    paperweight.paperDevBundle("1.19.4-R0.1-SNAPSHOT")
+    implementation "me.mattstudios.utils:matt-framework:1.4.6"
+}
+
+
+compileJava {
+    options.compilerArgs += ['-parameters']
+    options.encoding = 'UTF-8'
+}
+
+shadowJar {
+    minimize()
+    archiveFileName = "SaveCore-${version}.jar"
+    relocate 'me.mattstudios.mf', 'org.itzsave.utils'
+}
+

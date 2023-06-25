@@ -1,0 +1,3 @@
+messages:
+  reloaded: '<green>SaveCore has been reloaded!'
+  no-permission: '<red>You do not have permission to use this command!'
