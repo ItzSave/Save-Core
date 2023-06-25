@@ -1,4 +1,4 @@
-package org.itzsave.modules;
+package org.itzsave.module;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.Listener;
@@ -8,8 +8,8 @@ import org.itzsave.config.ConfigType;
 @SuppressWarnings("unused")
 public abstract class Module implements Listener {
 
-    private SaveCore plugin;
-    private ModuleType moduleType;
+    private final SaveCore plugin;
+    private final ModuleType moduleType;
 
     public Module(SaveCore plugin, ModuleType type) {
 

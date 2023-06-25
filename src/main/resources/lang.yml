@@ -1,3 +1,9 @@
 messages:
+  help:
+    - '<green><b>SaveCore</b>'
+    - '<gray>Developed by itzsave'
+    - ''
+    - '<aqua>/savecore reload <dark_gray>- <white>Reloads the plugin and it''s modules.'
+    - ''
   reloaded: '<green>SaveCore has been reloaded!'
   no-permission: '<red>You do not have permission to use this command!'

@@ -1,2 +1,7 @@
-package org.itzsave.config;public class ConfigType {
+package org.itzsave.config;
+
+public enum ConfigType {
+
+    SETTINGS,
+    MESSAGES;
 }

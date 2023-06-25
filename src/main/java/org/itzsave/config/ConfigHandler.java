@@ -8,19 +8,20 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.IOException;
 
-public class ConfigManager {
+public class ConfigHandler {
 
     private final JavaPlugin plugin;
     private final String name;
     private final File file;
     private FileConfiguration configuration;
 
-    public ConfigManager(JavaPlugin plugin, String name) {
+    public ConfigHandler(JavaPlugin plugin, String name) {
         this.plugin = plugin;
         this.name = name + ".yml";
         this.file = new File(plugin.getDataFolder(), this.name);
         this.configuration = new YamlConfiguration();
     }
+
 
     public void saveDefaultConfig() {
         if (!file.exists()) {

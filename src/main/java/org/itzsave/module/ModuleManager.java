@@ -1,24 +1,29 @@
-package org.itzsave.modules;
+package org.itzsave.module;
 
 import org.bukkit.event.HandlerList;
 import org.itzsave.SaveCore;
 import org.itzsave.config.ConfigType;
-import org.itzsave.modules.impl.PlayerListener;
+import org.itzsave.module.modules.AnnouncerModule;
+import org.itzsave.module.modules.ChatFormatModule;
+import org.itzsave.module.modules.PlayerListenerModule;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("unused")
 public class ModuleManager {
 
     private SaveCore plugin;
-    private Map<ModuleType, Module> modules = new HashMap<>();
+    private final Map<ModuleType, Module> modules = new HashMap<>();
 
     public void loadModules(SaveCore plugin) {
         this.plugin = plugin;
 
         if (!modules.isEmpty()) unloadModules();
 
-        registerModule(new PlayerListener(plugin), "modules.player-listener");
+        registerModule(new PlayerListenerModule(plugin), "Modules.player-listener");
+        registerModule(new AnnouncerModule(plugin), "Modules.auto-announcer");
+        registerModule(new ChatFormatModule(plugin), "Modules.chat-format");
 
         for (Module module : modules.values()) {
             try {
@@ -72,5 +77,9 @@ public class ModuleManager {
         return modules.containsKey(type);
     }
 
+
+    public int getModulesAmount(){
+        return modules.size();
+    }
 
 }

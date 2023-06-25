@@ -1,2 +1,4 @@
-package org.itzsave.hooks;public class PlaceholderAPIHook {
+package org.itzsave.hooks;
+
+public class PlaceholderAPIHook {
 }

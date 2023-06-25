@@ -12,7 +12,7 @@ import org.itzsave.module.Module;
 import org.itzsave.module.ModuleType;
 import org.itzsave.utils.TextUtils;
 
-public class PlayerListener extends Module implements Listener {
+public class PlayerListenerModule extends Module implements Listener {
 
     private boolean joinMessagesEnabled, quitMessagesEnabled, useCustomMessages;
 
@@ -20,7 +20,7 @@ public class PlayerListener extends Module implements Listener {
 
     final SaveCore plugin = SaveCore.getPlugin(SaveCore.class);
 
-    public PlayerListener(SaveCore plugin) {
+    public PlayerListenerModule(SaveCore plugin) {
         super(plugin, ModuleType.PLAYER_LISTENER);
     }
 

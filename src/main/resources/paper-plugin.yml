@@ -1,5 +1,20 @@
-name: SaveUtilsv2
+name: 'SaveCore'
 version: '${version}'
-main: org.saveutilsv2.SaveUtilsv2
+main: org.itzsave.SaveCore
 api-version: 1.19
-authors: [Save]
+authors: [ Save ]
+dependencies:
+  - name: LuckPerms
+    required: false
+  - name: PlaceholderAPI
+    required: false
+permissions:
+  savecore.admin:
+    description: Allows the user to reload the plugin
+    default: op
+    children:
+      - savecore.command.reload
+      - savecore.command.info
+  savecore.command.info:
+    description: Allows the user to use the information command.
+    default: op

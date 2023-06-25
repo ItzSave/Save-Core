@@ -1,0 +1,62 @@
+Modules:
+  # Enable or disable the player-listener module
+  player-listener: false
+
+  # Should we enable the auto announcer module
+  auto-announcer: false
+
+  # Should we enable the chat formatting module
+  chat-format: true
+
+  # Should we enable the custom commands module
+  custom-commands: false
+
+# Settings relating to Players. To enable change "player-listener" to true.
+Players:
+  # Should we disable default join messages?
+  disable-join-messages: false
+
+  # Should we disable default quit messages?
+  disable-quit-messages: false
+
+  # Should we use the custom messages below?
+  use-custom-join-quit-message: true
+
+  # Custom Join Message sent when a user joins and the above setting is set to true.
+  custom-join-message: "<green>%player% has joined the server."
+
+  # Custom Quit Message sent when a user leaves and the above setting is set to true.
+  custom-quit-message: "<red>%player% has left the server."
+
+
+Auto-Announcer:
+  # The delay between announcements. (In Seconds)
+  delay: 800
+
+  # Create your very own announcements here
+  announcements:
+    test1:
+      - "<reset>"
+      - "<aqua>This is an example announcement <gray>(#1)"
+      - "<reset>"
+    test2:
+      - "&r"
+      - "<red>This is an example announcement <gray>(#2)"
+      - "&r"
+
+
+# Chat formatting Placeholders:
+# The content of the message is added at the end.
+#
+# {name} - the player's name
+# {displayname} - the player's display name / nickname
+# {prefix} - the player's highest priority prefix
+# {suffix} - the player's highest priority suffix
+#
+Chat-Formats:
+  default: "%kyorify_luckperms_prefix%%kyorify_player_name%: "
+
+  # Set the format per group. Format is based on the name of their primary group.
+  group-formats:
+  #  default: "[Default] {name}: "
+  #  admin: "[Admin] {name}: "
