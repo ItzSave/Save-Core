@@ -10,7 +10,8 @@ import java.util.List;
 public enum Messages {
 
     RELOADED("reloaded", "<green>SaveCore has been reloaded!"),
-    NO_PERMISSION("no-permission", "<red>You do not have permission to use this command!");
+    NO_PERMISSION("no-permission", "<red>You do not have permission to use this command!"),
+    RULES("rules", "<red>Rules message is missing!");
 
 
     private final String path;

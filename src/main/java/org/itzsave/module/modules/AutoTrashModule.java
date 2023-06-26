@@ -4,6 +4,7 @@ import org.itzsave.SaveCore;
 import org.itzsave.module.Module;
 import org.itzsave.module.ModuleType;
 
+@SuppressWarnings("unused")
 public class AutoTrashModule extends Module {
 
     public AutoTrashModule(SaveCore plugin){
@@ -17,5 +18,6 @@ public class AutoTrashModule extends Module {
     @Override
     public void onDisable() {
 
+        // Handle shutdown.
     }
 }
