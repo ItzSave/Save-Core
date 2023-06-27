@@ -9,20 +9,18 @@ import java.util.List;
 @SuppressWarnings("unused")
 public enum Messages {
 
-    RELOADED("reloaded", "<green>SaveCore has been reloaded!"),
-    NO_PERMISSION("no-permission", "<red>You do not have permission to use this command!"),
-    RULES("rules", "<red>Rules message is missing!");
+    RELOADED("reloaded"),
+    NO_PERMISSION("no-permission"),
+    RULES("rules");
 
 
     private final String path;
-    private final String def;
 
     private static FileConfiguration config;
 
 
-    Messages(String path, String def) {
+    Messages(String path) {
         this.path = path;
-        this.def = def;
     }
 
     public static void setConfiguration(FileConfiguration c) {
@@ -30,7 +28,7 @@ public enum Messages {
     }
 
     public void send(CommandSender sender, Object... replacements) {
-        Object value = config.getString("Messages." + this.path, this.def);
+        Object value = config.getString("Messages." + this.path);
 
         String configMessage;
         if (value == null) {
