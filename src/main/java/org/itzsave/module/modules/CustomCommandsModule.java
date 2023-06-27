@@ -1,6 +1,8 @@
 package org.itzsave.module.modules;
 
 import me.clip.placeholderapi.PlaceholderAPI;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -20,6 +22,8 @@ public class CustomCommandsModule extends Module implements Listener {
 
     @Override
     public void onEnable() {
+        // We don't have to handle anything.
+        FileConfiguration config = getConfig(ConfigType.SETTINGS);
     }
 
     @Override
@@ -30,12 +34,14 @@ public class CustomCommandsModule extends Module implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onCustomCommand(PlayerCommandPreprocessEvent event) {
+        FileConfiguration config = getConfig(ConfigType.SETTINGS);
+        Player player = event.getPlayer();
         try {
-            getConfig(ConfigType.SETTINGS).getConfigurationSection("Custom-Commands.").getKeys(false).forEach(
+            config.getConfigurationSection("Custom-Commands.").getKeys(false).forEach(
                     command -> {
                         if (command.equalsIgnoreCase(event.getMessage().split(" ")[0].replace("/", ""))) {
                             event.setCancelled(true);
-                            getConfig(ConfigType.SETTINGS).getStringList("Custom-Commands." + command + ".message").forEach(line -> event.getPlayer().sendMessage(TextUtils.color(PlaceholderAPI.setPlaceholders(event.getPlayer(), (line)))));
+                            config.getStringList("Custom-Commands." + command + ".message").forEach(line -> player.sendMessage(TextUtils.color(PlaceholderAPI.setPlaceholders(player, (line)))));
 
                         }
                     }

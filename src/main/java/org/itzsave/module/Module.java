@@ -5,16 +5,15 @@ import org.bukkit.event.Listener;
 import org.itzsave.SaveCore;
 import org.itzsave.config.ConfigType;
 
-@SuppressWarnings("unused")
 public abstract class Module implements Listener {
 
     private final SaveCore plugin;
     private final ModuleType moduleType;
 
-    public Module(SaveCore plugin, ModuleType type) {
+    public Module(SaveCore plugin, ModuleType moduleType) {
 
         this.plugin = plugin;
-        this.moduleType = type;
+        this.moduleType = moduleType;
     }
 
     public SaveCore getPlugin() {

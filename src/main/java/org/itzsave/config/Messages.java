@@ -20,7 +20,7 @@ public enum Messages {
     private static FileConfiguration config;
 
 
-    Messages(String path, String def){
+    Messages(String path, String def) {
         this.path = path;
         this.def = def;
     }
@@ -32,19 +32,19 @@ public enum Messages {
     public void send(CommandSender sender, Object... replacements) {
         Object value = config.getString("Messages." + this.path, this.def);
 
-        String message;
+        String configMessage;
         if (value == null) {
-            message = "SaveCore: Message was not found! (" + this.path + ")";
+            configMessage = "SaveCore: Message was not found! (" + this.path + ")";
         } else {
-            message = value instanceof List ? TextUtils.fromList((List<?>) value) : value.toString();
+            configMessage = value instanceof List ? TextUtils.fromList((List<?>) value) : value.toString();
         }
 
-        if (!message.isEmpty()) {
-            sender.sendMessage(TextUtils.color(replace(message, replacements)));
+        if (!configMessage.isEmpty()) {
+            sender.sendMessage(TextUtils.color(replace(configMessage, replacements)));
         }
     }
 
-    private String replace(String message, Object... replacements){
+    private String replace(String message, Object... replacements) {
         for (int i = 0; i < replacements.length; i += 2) {
             if (i + 1 >= replacements.length) break;
             message = message.replace(String.valueOf(replacements[i]), String.valueOf(replacements[i + 1]));
