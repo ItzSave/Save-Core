@@ -31,7 +31,8 @@ public class SaveCoreCommand extends CommandBase {
     @Permission({"savecore.reload", "savecore.command.reload"})
     public void reloadCommand(CommandSender sender) {
         plugin.onReload();
-        Messages.RELOADED.send(sender);
+        long var = System.currentTimeMillis();
+        Messages.RELOADED.send(sender, "%ms%", String.valueOf(System.currentTimeMillis() - var));
     }
 
     @SubCommand("info")

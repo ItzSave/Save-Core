@@ -5,6 +5,7 @@ import org.itzsave.SaveCore;
 import org.itzsave.config.ConfigType;
 import org.itzsave.module.modules.AnnouncerModule;
 import org.itzsave.module.modules.ChatFormatModule;
+import org.itzsave.module.modules.CustomCommandsModule;
 import org.itzsave.module.modules.PlayerListenerModule;
 
 import java.util.HashMap;
@@ -24,6 +25,7 @@ public class ModuleManager {
         registerModule(new PlayerListenerModule(plugin), "Modules.player-listener");
         registerModule(new AnnouncerModule(plugin), "Modules.auto-announcer");
         registerModule(new ChatFormatModule(plugin), "Modules.chat-format");
+        registerModule(new CustomCommandsModule(plugin), "Modules.custom-commands");
 
         for (Module module : modules.values()) {
             try {

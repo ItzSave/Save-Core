@@ -14,9 +14,12 @@ import org.itzsave.utils.TextUtils;
 
 public class PlayerListenerModule extends Module implements Listener {
 
-    private boolean joinMessagesEnabled, quitMessagesEnabled, useCustomMessages;
+    private boolean joinMessagesEnabled;
+    private boolean quitMessagesEnabled;
+    private boolean useCustomMessages;
 
-    private String joinMessage, leaveMessage;
+    private String joinMessage;
+    private String leaveMessage;
 
     final SaveCore plugin = SaveCore.getPlugin(SaveCore.class);
 

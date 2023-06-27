@@ -60,3 +60,12 @@ Chat-Formats:
   group-formats:
   #  default: "[Default] {name}: "
   #  admin: "[Admin] {name}: "
+
+# Custom Commands
+Custom-Commands:
+  #This is the command name. This command for example is /twitter.
+  twitter:
+    #The message sent when the user runs the commands. Supports PlaceholderAPI
+    message:
+      - "<yellow><bold>[!] TWITTER</bold>"
+      - "<gold><bold>*</bold> <white>Follow us on twitter <yellow>@ItzSave"
