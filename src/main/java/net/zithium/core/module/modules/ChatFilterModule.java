@@ -7,11 +7,11 @@ import net.zithium.core.ZithiumCore;
 import net.zithium.core.config.ConfigType;
 import net.zithium.core.module.Module;
 import net.zithium.core.module.ModuleType;
-import net.zithium.core.utils.TextUtils;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 
 import java.util.List;
+import java.util.logging.Level;
 
 public class ChatFilterModule extends Module {
     private FileConfiguration config;
@@ -23,7 +23,7 @@ public class ChatFilterModule extends Module {
     @Override
     public void onEnable() {
         config = getConfig(ConfigType.SETTINGS);
-        getPlugin().getComponentLogger().info(TextUtils.color("[Module] Loaded chat filtering module"));
+        getPlugin().getLogger().log(Level.INFO, "[Module] Loaded chat filtering module");
     }
 
     @Override

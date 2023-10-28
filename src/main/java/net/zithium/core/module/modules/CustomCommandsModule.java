@@ -4,6 +4,7 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import net.zithium.core.config.ConfigType;
 import net.zithium.core.module.Module;
 import net.zithium.core.utils.TextUtils;
+import net.zithium.library.utils.Color;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,6 +13,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import net.zithium.core.ZithiumCore;
 import net.zithium.core.module.ModuleType;
+
+import java.util.logging.Level;
 
 public class CustomCommandsModule extends Module implements Listener {
 
@@ -24,7 +27,7 @@ public class CustomCommandsModule extends Module implements Listener {
     public void onEnable() {
         // We don't have to handle anything.
 
-        getPlugin().getComponentLogger().info(TextUtils.color("[Module] Loaded custom commands module."));
+        getPlugin().getLogger().log(Level.INFO, "[Module] Loaded custom commands module.");
     }
 
     @Override
@@ -42,7 +45,7 @@ public class CustomCommandsModule extends Module implements Listener {
                     command -> {
                         if (command.equalsIgnoreCase(event.getMessage().split(" ")[0].replace("/", ""))) {
                             event.setCancelled(true);
-                            config.getStringList("Custom-Commands." + command + ".message").forEach(line -> player.sendMessage(TextUtils.color(PlaceholderAPI.setPlaceholders(player, (line)))));
+                            config.getStringList("Custom-Commands." + command + ".message").forEach(line -> player.sendMessage(Color.stringColor(PlaceholderAPI.setPlaceholders(player, (line)))));
 
                         }
                     }

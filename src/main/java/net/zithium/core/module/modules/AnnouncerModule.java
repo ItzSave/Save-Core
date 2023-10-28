@@ -3,12 +3,12 @@ package net.zithium.core.module.modules;
 
 import net.zithium.core.ZithiumCore;
 import net.zithium.core.module.Module;
+import net.zithium.library.utils.Color;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import net.zithium.core.config.ConfigType;
 import net.zithium.core.module.ModuleType;
-import net.zithium.core.utils.TextUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +16,6 @@ import java.util.Map;
 
 /*
  Inspiration from https://github.com/ItzSave/DeluxeHub/
- Credit to ItsLewizzz
  */
 
 public class AnnouncerModule extends Module implements Runnable {
@@ -58,7 +57,7 @@ public class AnnouncerModule extends Module implements Runnable {
     public void run() {
         if (count == size) count = 0;
         for (Player player : Bukkit.getOnlinePlayers()) {
-            broadcasts.get(count).forEach(message -> player.sendMessage(TextUtils.color(message)));
+            broadcasts.get(count).forEach(message -> player.sendMessage(Color.stringColor(message)));
         }
         count++;
     }

@@ -13,13 +13,13 @@ import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import net.zithium.core.commands.AutoTrashCommand;
 import net.zithium.core.module.ModuleType;
-import net.zithium.core.utils.TextUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
 
 @SuppressWarnings("unused")
 public class AutoTrashModule extends Module implements Listener {
@@ -33,10 +33,10 @@ public class AutoTrashModule extends Module implements Listener {
 
     @Override
     public void onEnable() {
-        getPlugin().getComponentLogger().info(TextUtils.color("<green>[Module] Loaded auto trash module."));
+        getPlugin().getLogger().log(Level.INFO,"[Module] Loaded auto trash module.");
 
         CommandManager cm = new CommandManager(getPlugin());
-        getPlugin().getComponentLogger().info(TextUtils.color("<green>[Module] Loaded auto trash command."));
+        getPlugin().getLogger().log(Level.INFO,"[Module] Loaded auto trash command.");
         cm.register(new AutoTrashCommand(getPlugin()));
     }
 
