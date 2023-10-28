@@ -1,4 +1,4 @@
-package org.itzsave.config;
+package net.zithium.core.config;
 
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
 
 public class ConfigHandler {
 
@@ -31,13 +32,13 @@ public class ConfigHandler {
         try {
             configuration.load(file);
         } catch (InvalidConfigurationException | IOException e) {
-            e.printStackTrace();
             plugin.getLogger().severe("============= CONFIGURATION ERROR =============");
             plugin.getLogger().severe("There was an error loading " + name);
             plugin.getLogger().severe("Please check for any obvious configuration mistakes");
             plugin.getLogger().severe("such as using tabs for spaces or forgetting to end quotes");
             plugin.getLogger().severe("before reporting to the developer. The plugin will now disable..");
             plugin.getLogger().severe("============= CONFIGURATION ERROR =============");
+            plugin.getLogger().log(Level.SEVERE, "", e);
             plugin.getServer().getPluginManager().disablePlugin(plugin);
         }
 
@@ -48,7 +49,7 @@ public class ConfigHandler {
         try {
             getConfig().save(file);
         } catch (IOException e) {
-            e.printStackTrace();
+            plugin.getLogger().log(Level.SEVERE, "Plugin encountered an error while attempting to save the configuration file", e);
         }
     }
 

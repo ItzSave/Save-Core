@@ -1,4 +1,4 @@
-package org.itzsave.module.modules;
+package net.zithium.core.module.modules;
 
 import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.event.player.AsyncChatEvent;
@@ -8,41 +8,42 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
-import net.luckperms.api.LuckPerms;
 import net.luckperms.api.cacheddata.CachedMetaData;
+import net.zithium.core.module.Module;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.itzsave.SaveCore;
-import org.itzsave.module.Module;
-import org.itzsave.module.ModuleType;
+import net.zithium.core.ZithiumCore;
+import net.zithium.core.module.ModuleType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 public class ChatFormatModule extends Module implements Listener {
 
-    public ChatFormatModule(SaveCore plugin) {
+    public ChatFormatModule(ZithiumCore plugin) {
         super(plugin, ModuleType.CHAT);
     }
 
     @Override
     public void onEnable() {
 
-        if (getPlugin().getServer().getPluginManager().getPlugin("LuckPerms") != null) {
-            getPlugin().luckPerms = getPlugin().getServer().getServicesManager().load(LuckPerms.class);
-            getPlugin().getLogger().info("[Module] Loaded chat formatter module.");
-        } else {
-            getPlugin().getLogger().warning("[Module] Chat formatting module is enabled without LuckPerms installed!");
-            getPlugin().setEnabled(false);
+        try {
+            getPlugin().getServer().getPluginManager().getPlugin("LuckPerms");
+            getPlugin().getLogger().log(Level.INFO,"[Module] Loaded chat formatting module.");
+        } catch (Exception ex) {
+            getPlugin().getLogger().log(Level.SEVERE, "[Module] Chat formatting module is enabled without LuckPerms installed!");
+            getPlugin().getServer().getPluginManager().disablePlugin(getPlugin());
         }
     }
 
     @Override
     public void onDisable() {
+        getPlugin().getLogger().log(Level.INFO,"<green>[Module] Unloaded chat formatting module.");
     }
 
     @EventHandler
@@ -51,14 +52,15 @@ public class ChatFormatModule extends Module implements Listener {
     }
 
     static class SaveCoreChatRenderer implements ChatRenderer {
-        final SaveCore plugin = SaveCore.getPlugin(SaveCore.class);
+        final ZithiumCore plugin = ZithiumCore.getPlugin(ZithiumCore.class);
+
 
         @Override
         public @NotNull Component render(@NotNull Player source, @NotNull Component sourceDisplayName, @NotNull Component message, @NotNull Audience viewer) {
 
             FileConfiguration config = plugin.getConfig();
 
-            final CachedMetaData metaData = plugin.luckPerms.getPlayerAdapter(Player.class).getMetaData(source);
+            final CachedMetaData metaData = plugin.getLuckPerms().getPlayerAdapter(Player.class).getMetaData(source);
             final String group = metaData.getPrimaryGroup();
 
             @Nullable String format = config.getString(config.getString("Chat-Formats.group-formats." + group) != null ? "Chat-Formats.group-formats." + group : "Chat-Formats.default");

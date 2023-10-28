@@ -1,29 +1,30 @@
-package org.itzsave.module.modules;
+package net.zithium.core.module.modules;
 
 import me.clip.placeholderapi.PlaceholderAPI;
+import net.zithium.core.config.ConfigType;
+import net.zithium.core.module.Module;
+import net.zithium.core.utils.TextUtils;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.itzsave.SaveCore;
-import org.itzsave.config.ConfigType;
-import org.itzsave.module.Module;
-import org.itzsave.module.ModuleType;
-import org.itzsave.utils.TextUtils;
+import net.zithium.core.ZithiumCore;
+import net.zithium.core.module.ModuleType;
 
 public class CustomCommandsModule extends Module implements Listener {
 
 
-    public CustomCommandsModule(SaveCore plugin) {
+    public CustomCommandsModule(ZithiumCore plugin) {
         super(plugin, ModuleType.CUSTOM_COMMANDS);
     }
 
     @Override
     public void onEnable() {
         // We don't have to handle anything.
-        FileConfiguration config = getConfig(ConfigType.SETTINGS);
+
+        getPlugin().getComponentLogger().info(TextUtils.color("[Module] Loaded custom commands module."));
     }
 
     @Override

@@ -1,4 +1,4 @@
-package org.itzsave.module;
+package net.zithium.core.module;
 
 public enum ModuleType {
 
@@ -6,5 +6,6 @@ public enum ModuleType {
     PLAYER_LISTENER,
     AUTO_TRASH,
     CUSTOM_COMMANDS,
-    CHAT;
+    CHAT,
+    ENTITY_CLEAR;
 }

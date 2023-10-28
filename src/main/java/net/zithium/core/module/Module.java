@@ -1,22 +1,22 @@
-package org.itzsave.module;
+package net.zithium.core.module;
 
+import net.zithium.core.ZithiumCore;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.Listener;
-import org.itzsave.SaveCore;
-import org.itzsave.config.ConfigType;
+import net.zithium.core.config.ConfigType;
 
 public abstract class Module implements Listener {
 
-    private final SaveCore plugin;
+    private final ZithiumCore plugin;
     private final ModuleType moduleType;
 
-    public Module(SaveCore plugin, ModuleType moduleType) {
+    public Module(ZithiumCore plugin, ModuleType moduleType) {
 
         this.plugin = plugin;
         this.moduleType = moduleType;
     }
 
-    public SaveCore getPlugin() {
+    public ZithiumCore getPlugin() {
         return plugin;
     }
 

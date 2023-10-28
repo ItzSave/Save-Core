@@ -1,5 +1,10 @@
+# ------------------
+# Zithium Core
+# ------------------
+
+# Enable or disable certain modules here.
 Modules:
-  # Enable or disable the player-listener module
+  # Should we enable the player-listener module
   player-listener: false
 
   # Should we enable the auto announcer module
@@ -10,6 +15,27 @@ Modules:
 
   # Should we enable the custom commands module
   custom-commands: false
+
+  # Should we enable the auto trash module
+  auto-trash: false
+
+  # Should we enable the chat filter module
+  chat-filter: true
+
+  # Should we automatically clear dropped items & entities? REQUIRES RoseStacker
+  entity-clear: true
+
+# Settings related to the automatic entity clear. # REQUIRES RoseStacker
+entity-clearing:
+
+  # Should we clear stacked items that are dropped on the ground?
+  clear-items: true
+
+  # Should we clear stacked entities?
+  clear-entities: true
+
+  # How often the clear task runs
+  delay: 120 # in seconds
 
 # Settings relating to Players. To enable change "player-listener" to true.
 Players:
@@ -22,11 +48,13 @@ Players:
   # Should we use the custom messages below?
   use-custom-join-quit-message: true
 
-  # Custom Join Message sent when a user joins and the above setting is set to true.
-  custom-join-message: "<green>%player% has joined the server."
+  # Custom messages if above option is set to true
+  custom-messages:
+    # Custom Join Message sent when a user joins and the above setting is set to true.
+    join-message: "<green>%player% has joined the server."
 
-  # Custom Quit Message sent when a user leaves and the above setting is set to true.
-  custom-quit-message: "<red>%player% has left the server."
+    # Custom Quit Message sent when a user leaves and the above setting is set to true.
+    quit-message: "<red>%player% has left the server."
 
 
 Auto-Announcer:
@@ -45,21 +73,26 @@ Auto-Announcer:
       - "&r"
 
 
+# Settings for the chat filter. Add any words here to be blocked.
+Chat-Filter:
+  blocked-words:
+    - fuck
+    - shit
+
+# Message for the /donation command
+Donation-Announcement:
+  - '{player} has donated GG!'
+
 # Chat formatting Placeholders:
 # The content of the message is added at the end.
-#
-# {name} - the player's name
-# {displayname} - the player's display name / nickname
-# {prefix} - the player's highest priority prefix
-# {suffix} - the player's highest priority suffix
-#
 Chat-Formats:
-  default: "%kyorify_luckperms_prefix%%kyorify_player_name%: "
+  default: "%kyorify_luckperms_prefix%%kyorify_player_name%:<reset> "
 
   # Set the format per group. Format is based on the name of their primary group.
   group-formats:
-  #  default: "[Default] {name}: "
-  #  admin: "[Admin] {name}: "
+  #  default: "[Default] %kyorify_player_name%: "
+  #  admin: "[Admin] %kyorify_player_name%: "
+
 
 # Custom Commands
 Custom-Commands:

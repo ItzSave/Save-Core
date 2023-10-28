@@ -1,8 +1,8 @@
-package org.itzsave.config;
+package net.zithium.core.config;
 
+import net.zithium.core.ZithiumCore;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.itzsave.SaveCore;
 
 import java.io.File;
 import java.util.HashMap;
@@ -17,10 +17,11 @@ public class ConfigManager {
         configurations = new HashMap<>();
     }
 
-    public void loadFiles(SaveCore plugin) {
+    public void loadFiles(ZithiumCore plugin) {
 
         registerFile(ConfigType.MESSAGES, new ConfigHandler(plugin, "lang"));
         registerFile(ConfigType.SETTINGS, new ConfigHandler(plugin, "config"));
+        registerFile(ConfigType.DATA, new ConfigHandler(plugin, "data"));
 
         configurations.values().forEach(ConfigHandler::saveDefaultConfig);
 

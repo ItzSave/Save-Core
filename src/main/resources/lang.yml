@@ -1,13 +1,50 @@
+# -------------
+# General Plugin Messages
+# -------------
 messages:
   help:
-    - '<green><b>SaveCore</b>'
+    - '<green><b>Zithium Core</b>'
     - '<gray>Developed by itzsave'
-    - ''
-    - '<aqua>/savecore reload <dark_gray>- <white>Reloads the plugin and it''s modules.'
-    - ''
-  reloaded: '<green>SaveCore has been reloaded in %ms%!'
+    - '<reset>'
+    - '<aqua>/zcore reload <dark_gray>- <white>Reloads the plugin and it''s modules.'
+    - '<aqua>/zcore info <dark_gray>- <white>Displays info about the server and plugin'
+    - '<aqua>/zcore timer <dark_gray>- <white>Displays a timer until the next entity clear.'
+    - '<reset>'
+  reloaded: '<green>ZithiumCore has been reloaded in <white>%ms%ms<green>!'
   no-permission: '<red>You do not have permission to use this command!'
+  invalid-player: '<red>That player is either offline or does not exist.'
+  invalid-arguments: '<red>That command is invalid please try again.'
+
+  # Messages for the automated entity clear.
+  entity-clear:
+    finished: '<green>Complete | <white>All stacked entities have been cleared!'
+    # Sends at 60 seconds, 30 seconds, and 5 seconds
+    warning: '<red>Warning | <white>All stacked entities and items will be cleared in <green>%timeleft%<white>s!'
+    # Message when someone uses /zcore timer command.
+    timer: '<yellow>Info | <white>There is <yellow>%time%<white> left until the next entity clear.'
 
   rules:
     - '<gold>Server Rules:'
     - '<white> - Do not grief'
+
+  # --------------------
+  # Auto Trash Messages
+  # --------------------
+  auto_trash:
+    help:
+      - "<aqua><bold>AutoTrash</bold>"
+      - ""
+      - "<green>/autotrash add <material> <dark_gray>- <white>Add an item to your Trash List."
+      - "<green>/autotrash remove <material> <dark_gray>- <white>Remove an item from your Trash List."
+      - "<green>/autotrash list <dark_gray>- <white>Outputs your Trash List."
+      - "<green>/autotrash reset <dark_gray>- <white>Reset your Trash List."
+
+    null_item: '<red>The item you inputted was invalid!'
+    trash_list_formatted: "<gold><bold>(!)</bold> <yellow>Your trash list: <white>%trashlist%"
+    trash_list_reset: "<gold><bold>(!)</bold> <yellow>Your trash list has been reset."
+    trash_list_empty: "<gold><bold>(!)</bold> <yellow>Your trash list is empty."
+    item_added: "<gold><bold>(!)</bold> <yellow>Successfully added <white>%item% <yellow>to your list."
+    item_removed: "<gold><bold>(!)</bold> <yellow>Successfully removed <white>%item% <yellow>from your list."
+    not_enough_args: "<red><bold>(!)</bold> <red>Not enough arguments inputted."
+    invalid_args: "<red><bold>(!)</bold> <red>Your sub-command was not found."
+

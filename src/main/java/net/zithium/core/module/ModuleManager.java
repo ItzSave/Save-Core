@@ -1,23 +1,22 @@
-package org.itzsave.module;
+package net.zithium.core.module;
 
+import net.zithium.core.ZithiumCore;
+import net.zithium.core.module.modules.*;
+import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
-import org.itzsave.SaveCore;
-import org.itzsave.config.ConfigType;
-import org.itzsave.module.modules.AnnouncerModule;
-import org.itzsave.module.modules.ChatFormatModule;
-import org.itzsave.module.modules.CustomCommandsModule;
-import org.itzsave.module.modules.PlayerListenerModule;
+import net.zithium.core.config.ConfigType;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 
-@SuppressWarnings("unused")
+
 public class ModuleManager {
 
-    private SaveCore plugin;
+    private ZithiumCore plugin;
     private final Map<ModuleType, Module> modules = new HashMap<>();
 
-    public void loadModules(SaveCore plugin) {
+    public void loadModules(ZithiumCore plugin) {
         this.plugin = plugin;
 
         if (!modules.isEmpty()) unloadModules();
@@ -26,12 +25,22 @@ public class ModuleManager {
         registerModule(new AnnouncerModule(plugin), "Modules.auto-announcer");
         registerModule(new ChatFormatModule(plugin), "Modules.chat-format");
         registerModule(new CustomCommandsModule(plugin), "Modules.custom-commands");
+        registerModule(new AutoTrashModule(plugin), "Modules.auto-trash");
+        registerModule(new ChatFilterModule(plugin), "Modules.chat-filter");
+
+        if (Bukkit.getPluginManager().isPluginEnabled("RoseStacker")) {
+            plugin.getLogger().log(Level.INFO, "[Hook] Loaded RoseStacker hook");
+            registerModule(new EntityClearModule(plugin), "Modules.entity-clear");
+        } else {
+            plugin.getLogger().log(Level.SEVERE, "<red>[Hook] Entity clear module is enabled without rose stacker!");
+        }
+
 
         for (Module module : modules.values()) {
             try {
                 module.onEnable();
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception ex) {
+                plugin.getLogger().log(Level.SEVERE, "Plugin encountered a fatal error. Will now disable", ex);
                 plugin.getServer().getPluginManager().disablePlugin(plugin);
                 break;
             }
@@ -42,7 +51,7 @@ public class ModuleManager {
     }
 
     public void registerModule(Module module, String isEnabledPath) {
-        SaveCore plugin = module.getPlugin();
+        ZithiumCore plugin = module.getPlugin();
         if (isEnabledPath != null && !plugin.getConfigManager().getFile(ConfigType.SETTINGS).getConfig().getBoolean(isEnabledPath, false))
             return;
 
@@ -55,32 +64,37 @@ public class ModuleManager {
 
 
     public void unloadModules() {
+
+        if (this == null) return;
+
         for (Module module : modules.values()) {
             try {
                 HandlerList.unregisterAll(module);
                 module.onDisable();
             } catch (Exception e) {
-                e.printStackTrace();
-                plugin.getLogger().severe("[ERROR] There was an error unloading the modules!");
+                plugin.getLogger().log(Level.SEVERE, "Plugin encountered a fatal error while trying to unload modules.", e);
             }
         }
         modules.clear();
     }
 
+    @SuppressWarnings("unused")
     public Module getModule(ModuleType type) {
         return modules.get(type);
     }
 
+    @SuppressWarnings("unused")
     public void registerModule(Module module) {
         registerModule(module, null);
     }
 
+    @SuppressWarnings("unused")
     public boolean isEnabled(ModuleType type) {
         return modules.containsKey(type);
     }
 
 
-    public int getModulesAmount(){
+    public int getModulesAmount() {
         return modules.size();
     }
 

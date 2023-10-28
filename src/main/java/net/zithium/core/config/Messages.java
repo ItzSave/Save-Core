@@ -1,8 +1,9 @@
-package org.itzsave.config;
+package net.zithium.core.config;
 
+import net.zithium.core.utils.TextUtils;
+import net.zithium.library.utils.Color;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.itzsave.utils.TextUtils;
 
 import java.util.List;
 
@@ -11,7 +12,16 @@ public enum Messages {
 
     RELOADED("reloaded"),
     NO_PERMISSION("no-permission"),
-    RULES("rules");
+    RULES("rules"),
+    HELP("help"),
+    INVALID_PLAYER("invalid-player"),
+    INVALID_ARGUMENT("invalid-arguments"),
+    AUTO_TRASH_HELP("auto_trash.help"),
+    AUTO_TRASH_NULL_ITEM("auto_trash.null_item"),
+    AUTO_TRASH_ITEM_ADDED("auto_trash.item_added"),
+    ENTITY_CLEAR_WARNING("entity-clear.warning"),
+    ENTITY_CLEAR_FINISHED("entity-clear.finished"),
+    ENTITY_CLEAR_TIMER_COMMAND("entity-clear.timer");
 
 
     private final String path;
@@ -28,17 +38,18 @@ public enum Messages {
     }
 
     public void send(CommandSender sender, Object... replacements) {
-        Object value = config.getString("Messages." + this.path);
+        Object value = config.get("messages." + this.path);
 
         String configMessage;
         if (value == null) {
-            configMessage = "SaveCore: Message was not found! (" + this.path + ")";
+            configMessage = "<red>Zithium Message was not found! (" + this.path + ")";
         } else {
             configMessage = value instanceof List ? TextUtils.fromList((List<?>) value) : value.toString();
         }
 
+
         if (!configMessage.isEmpty()) {
-            sender.sendMessage(TextUtils.color(replace(configMessage, replacements)));
+            sender.sendMessage(Color.stringColor(replace(configMessage, replacements)));
         }
     }
 

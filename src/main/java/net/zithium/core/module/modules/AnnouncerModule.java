@@ -1,14 +1,14 @@
-package org.itzsave.module.modules;
+package net.zithium.core.module.modules;
 
 
+import net.zithium.core.ZithiumCore;
+import net.zithium.core.module.Module;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.itzsave.SaveCore;
-import org.itzsave.config.ConfigType;
-import org.itzsave.module.Module;
-import org.itzsave.module.ModuleType;
-import org.itzsave.utils.TextUtils;
+import net.zithium.core.config.ConfigType;
+import net.zithium.core.module.ModuleType;
+import net.zithium.core.utils.TextUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +26,7 @@ public class AnnouncerModule extends Module implements Runnable {
     private int count = 0;
     private int size = 0;
 
-    public AnnouncerModule(SaveCore plugin) {
+    public AnnouncerModule(ZithiumCore plugin) {
         super(plugin, ModuleType.ANNOUNCEMENTS);
     }
 
@@ -44,7 +44,7 @@ public class AnnouncerModule extends Module implements Runnable {
         if (size > 0)
             broadcastTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(getPlugin(), this, 60L, config.getInt("Auto-Announcer.delay") * 20L);
 
-        getPlugin().getLogger().info("[Module] Loaded auto broadcaster");
+        getPlugin().getLogger().info("[Module] Loaded auto announcer module");
 
     }
 

@@ -1,20 +1,34 @@
-name: 'SaveCore'
+name: 'ZithiumCore'
 version: '${version}'
-main: org.itzsave.SaveCore
-api-version: 1.19
+main: net.zithium.core.ZithiumCore
+api-version: '1.19'
 authors: [ Save ]
 dependencies:
   - name: LuckPerms
     required: false
   - name: PlaceholderAPI
     required: false
+  - name: RoseStacker
+    required: false
+
+load-after:
+  - name: RoseStacker
+    bootstrap: false
+
 permissions:
-  savecore.admin:
+  zcore.admin:
     description: Allows the user to reload the plugin
     default: op
     children:
-      - savecore.command.reload
-      - savecore.command.info
-  savecore.command.info:
+      - zcore.command.reload
+      - zcore.command.info
+      - zcore.command.autotrash
+  zcore.command.info:
     description: Allows the user to use the information command.
+    default: op
+  zcore.command.reload:
+    description: Allows the user to use the reload command.
+    default: op
+  zcore.command.autotrash:
+    description: Allows access to the auto trash command.
     default: op
