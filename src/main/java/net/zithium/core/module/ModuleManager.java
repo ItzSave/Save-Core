@@ -32,7 +32,9 @@ public class ModuleManager {
             plugin.getLogger().log(Level.INFO, "[Hook] Loaded RoseStacker hook");
             registerModule(new EntityClearModule(plugin), "Modules.entity-clear");
         } else {
-            plugin.getLogger().log(Level.SEVERE, "<red>[Hook] Entity clear module is enabled without rose stacker!");
+            plugin.getLogger().log(Level.SEVERE, "[Hook] Entity clear module is enabled without rose stacker!");
+            plugin.getConfig().set("Modules.entity-clear", false);
+            plugin.getConfigManager().getFile(ConfigType.SETTINGS).save();
         }
 
 
