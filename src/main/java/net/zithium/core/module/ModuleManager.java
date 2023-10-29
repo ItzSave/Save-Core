@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import net.zithium.core.config.ConfigType;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -28,15 +29,7 @@ public class ModuleManager {
         registerModule(new AutoTrashModule(plugin), "Modules.auto-trash");
         registerModule(new ChatFilterModule(plugin), "Modules.chat-filter");
 
-        if (Bukkit.getPluginManager().isPluginEnabled("RoseStacker")) {
-            plugin.getLogger().log(Level.INFO, "[Hook] Loaded RoseStacker hook");
-            registerModule(new EntityClearModule(plugin), "Modules.entity-clear");
-        } else {
-            plugin.getLogger().log(Level.SEVERE, "[Hook] Entity clear module is enabled without rose stacker!");
-            plugin.getConfig().set("Modules.entity-clear", false);
-            plugin.getConfigManager().getFile(ConfigType.SETTINGS).save();
-        }
-
+        loadRoseStacker();
 
         for (Module module : modules.values()) {
             try {
@@ -98,6 +91,23 @@ public class ModuleManager {
 
     public int getModulesAmount() {
         return modules.size();
+    }
+
+    /**
+     * Checks if the "entity-clear" module is enabled in the configuration and, if enabled,
+     * checks if the "RoseStacker" plugin is installed. If both conditions are met, it loads
+     * the EntityClearModule as a hook.
+     */
+    private void loadRoseStacker() {
+        // Check if the "entity-clear" module is enabled in the configuration
+        boolean entityClearEnabled = plugin.getConfig().getBoolean("Modules.entity-clear", false);
+
+        if (entityClearEnabled && Bukkit.getPluginManager().getPlugin("RoseStacker") != null) {
+            plugin.getLogger().log(Level.INFO, "[Hook] Loaded RoseStacker hook");
+            registerModule(new EntityClearModule(plugin), "Modules.entity-clear");
+        } else if (entityClearEnabled) {
+            plugin.getLogger().log(Level.SEVERE, "[Hook] Entity clear module is enabled without RoseStacker!");
+        }
     }
 
 }
