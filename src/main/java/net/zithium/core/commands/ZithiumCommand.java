@@ -9,7 +9,6 @@ import net.zithium.core.module.modules.EntityClearModule;
 import net.zithium.library.utils.Color;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import net.zithium.core.utils.TextUtils;
 
 @SuppressWarnings({"unused", "deprecation"})
 @Command("zithium")
@@ -31,14 +30,19 @@ public class ZithiumCommand extends CommandBase {
     @SubCommand("reload")
     @Permission({"zcore.admin", "zcore.command.reload"})
     public void reloadCommand(CommandSender sender) {
-
         if (!(sender instanceof Player)) {
+            // If the sender is not a player, perform a reload and send a message
             sender.sendMessage("ZithiumCore has been reloaded.");
         }
 
-        plugin.onReload();
-        long var = System.currentTimeMillis();
-        Messages.RELOADED.send(sender, "%ms%", String.valueOf(System.currentTimeMillis() - var));
+        long startTime = System.currentTimeMillis(); // Record the start time
+        plugin.onReload(); // Perform the plugin reload
+
+        if (sender instanceof Player) {
+            // If the sender is a player, send a message with the time it took to reload
+            long elapsedTime = System.currentTimeMillis() - startTime;
+            Messages.RELOADED.send(sender, "%ms%", String.valueOf(elapsedTime));
+        }
     }
 
     @SubCommand("info")
