@@ -59,7 +59,7 @@ public final class ZithiumCore extends JavaPlugin {
         } else {
             getLogger().log(Level.SEVERE,"[Hook] PlaceholderAPI not installed.");
         }
-        getLogger().log(Level.INFO,"<blue>------ [ LOAD COMPLETE ] ------]");
+        getLogger().log(Level.INFO,"------ [ LOAD COMPLETE ] ------]");
     }
 
     @Override
