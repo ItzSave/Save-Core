@@ -31,6 +31,11 @@ public class ZithiumCommand extends CommandBase {
     @SubCommand("reload")
     @Permission({"zcore.admin", "zcore.command.reload"})
     public void reloadCommand(CommandSender sender) {
+
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("ZithiumCore has been reloaded.");
+        }
+
         plugin.onReload();
         long var = System.currentTimeMillis();
         Messages.RELOADED.send(sender, "%ms%", String.valueOf(System.currentTimeMillis() - var));
