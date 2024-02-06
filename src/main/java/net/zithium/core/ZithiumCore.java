@@ -4,6 +4,7 @@ import me.mattstudios.mf.base.CommandManager;
 import net.luckperms.api.LuckPerms;
 import net.zithium.core.commands.DonationCommand;
 import net.zithium.core.commands.RulesCommand;
+import net.zithium.core.commands.SpawnCommand;
 import net.zithium.core.commands.ZithiumCommand;
 import net.zithium.core.config.ConfigManager;
 import net.zithium.core.config.Messages;
@@ -91,7 +92,8 @@ public final class ZithiumCore extends JavaPlugin {
         Stream.of(
                 new DonationCommand(this),
                 new ZithiumCommand(this),
-                new RulesCommand()
+                new RulesCommand(),
+                new SpawnCommand()
         ).forEach(commandManager::register);
     }
 

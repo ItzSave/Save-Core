@@ -1,7 +1,6 @@
 package net.zithium.core.config;
 
 import net.zithium.core.utils.TextUtils;
-import net.zithium.library.utils.Color;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -49,7 +48,7 @@ public enum Messages {
 
 
         if (!configMessage.isEmpty()) {
-            sender.sendMessage(Color.stringColor(replace(configMessage, replacements)));
+            sender.sendMessage(TextUtils.color(replace(configMessage, replacements)));
         }
     }
 

@@ -1,11 +1,10 @@
 package net.zithium.core.module.modules;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.zithium.core.config.ConfigType;
 import net.zithium.core.ZithiumCore;
 import net.zithium.core.module.Module;
-import net.zithium.library.utils.Color;
+import net.zithium.core.utils.TextUtils;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -22,8 +21,8 @@ public class PlayerListenerModule extends Module implements Listener {
     private boolean quitMessagesEnabled;
     private boolean useCustomMessages;
 
-    private String joinMessage;
-    private String leaveMessage;
+    private Component joinMessage;
+    private Component leaveMessage;
 
     public PlayerListenerModule(ZithiumCore plugin) {
         super(plugin, ModuleType.PLAYER_LISTENER);
@@ -36,8 +35,8 @@ public class PlayerListenerModule extends Module implements Listener {
         quitMessagesEnabled = config.getBoolean("Players.disable-quit-messages");
         useCustomMessages = config.getBoolean("Players.use-custom-join-quit-message");
 
-        joinMessage = Color.stringColor(config.getString("Players.custom-messages.join-message"));
-        leaveMessage = Color.stringColor(config.getString("Players.custom-messages.quit-message"));
+        joinMessage = TextUtils.color(config.getString("Players.custom-messages.join-message"));
+        leaveMessage = TextUtils.color(config.getString("Players.custom-messages.quit-message"));
 
         getPlugin().getLogger().log(Level.INFO,"[Module] Loaded player listener module");
     }
@@ -53,8 +52,7 @@ public class PlayerListenerModule extends Module implements Listener {
             if (!useCustomMessages) {
                 event.joinMessage(null);
             } else {
-                Component componentJoinMessage = MiniMessage.miniMessage().deserialize(joinMessage);
-                event.joinMessage(componentJoinMessage);
+                event.joinMessage(joinMessage);
             }
         }
     }
@@ -65,8 +63,7 @@ public class PlayerListenerModule extends Module implements Listener {
             if (!useCustomMessages) {
                 event.quitMessage(null);
             } else {
-                Component componentQuitMessage = MiniMessage.miniMessage().deserialize(leaveMessage);
-                event.quitMessage(componentQuitMessage);
+                event.quitMessage(leaveMessage);
             }
         }
 

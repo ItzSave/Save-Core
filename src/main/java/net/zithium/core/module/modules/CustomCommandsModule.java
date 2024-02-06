@@ -4,7 +4,7 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import net.zithium.core.config.ConfigType;
 import net.zithium.core.module.Module;
 import net.zithium.core.utils.TextUtils;
-import net.zithium.library.utils.Color;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -45,13 +45,13 @@ public class CustomCommandsModule extends Module implements Listener {
                     command -> {
                         if (command.equalsIgnoreCase(event.getMessage().split(" ")[0].replace("/", ""))) {
                             event.setCancelled(true);
-                            config.getStringList("Custom-Commands." + command + ".message").forEach(line -> player.sendMessage(Color.stringColor(PlaceholderAPI.setPlaceholders(player, (line)))));
+                            config.getStringList("Custom-Commands." + command + ".message").forEach(line -> player.sendMessage(TextUtils.color(PlaceholderAPI.setPlaceholders(player, (line)))));
 
                         }
                     }
             );
         } catch (NullPointerException ex) {
-            ex.printStackTrace();
+            Bukkit.getLogger().log(Level.WARNING, "There was an error while attempting to send a custom command!", ex);
         }
 
     }

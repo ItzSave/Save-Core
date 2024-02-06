@@ -6,7 +6,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import net.zithium.core.config.ConfigType;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;

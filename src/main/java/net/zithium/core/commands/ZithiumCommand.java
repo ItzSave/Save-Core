@@ -6,9 +6,12 @@ import net.zithium.core.config.Messages;
 import net.zithium.core.ZithiumCore;
 import net.zithium.core.module.ModuleType;
 import net.zithium.core.module.modules.EntityClearModule;
-import net.zithium.library.utils.Color;
+import net.zithium.core.utils.TextUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @SuppressWarnings({"unused", "deprecation"})
 @Command("zithium")
@@ -48,25 +51,30 @@ public class ZithiumCommand extends CommandBase {
     @SubCommand("info")
     @Permission({"zcore.admin", "zcore.command.info"})
     public void infoCommand(Player player) {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        String formattedTime = localDateTime.format(formatter);
 
-        player.sendMessage(Color.stringColor("<reset>"));
-        player.sendMessage(Color.stringColor("<green>Server Version: <reset>" + plugin.getServer().getVersion()));
-        player.sendMessage(Color.stringColor(""));
-        player.sendMessage(Color.stringColor("<blue>Modules Loaded: <reset>" + plugin.getModuleManager().getModulesAmount()));
-        player.sendMessage(Color.stringColor("<blue>Plugin Version: <reset>" + plugin.getDescription().getVersion()));
-        player.sendMessage(Color.stringColor("<reset>"));
-        player.sendMessage(Color.stringColor("<red>Entity Clear Task: <reset>" + EntityClearModule.getTimeLeft()));
+        player.sendMessage(TextUtils.color("<reset>"));
+        player.sendMessage(TextUtils.color("<green>Server Version: <reset>" + plugin.getServer().getVersion()));
+        player.sendMessage(TextUtils.color(""));
+        player.sendMessage(TextUtils.color("<blue>Modules Loaded: <reset>" + plugin.getModuleManager().getModulesAmount()));
+        player.sendMessage(TextUtils.color("<blue>Plugin Version: <reset>" + plugin.getDescription().getVersion()));
+        player.sendMessage(TextUtils.color("<reset>"));
+        player.sendMessage(TextUtils.color("<red>Entity Clear Task: <reset>" + EntityClearModule.getTimeLeft()));
+        player.sendMessage(TextUtils.color("<reset>"));
+        player.sendMessage(TextUtils.color("<yellow>System Time: <reset>" + formattedTime));
 
 
     }
 
     @SubCommand("timer")
     @Permission({"zcore.admin", "zcore.command.timer"})
-    public void timerCommand(CommandSender sender){
+    public void timerCommand(CommandSender sender) {
         if (plugin.getModuleManager().isEnabled(ModuleType.ENTITY_CLEAR)) {
             Messages.ENTITY_CLEAR_TIMER_COMMAND.send(sender, "%time%", EntityClearModule.getTimeLeft());
         } else {
-            sender.sendMessage("<red>This module is not enabled!");
+            sender.sendMessage(TextUtils.color("<red>This module is not enabled!"));
         }
     }
 

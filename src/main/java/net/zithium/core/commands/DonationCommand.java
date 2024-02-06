@@ -8,7 +8,6 @@ import me.mattstudios.mf.base.CommandBase;
 import net.zithium.core.ZithiumCore;
 import net.zithium.core.config.Messages;
 import net.zithium.core.utils.TextUtils;
-import net.zithium.library.utils.Color;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -39,7 +38,7 @@ public class DonationCommand extends CommandBase {
         }
         Bukkit.getOnlinePlayers().forEach(player -> {
             for (String message : plugin.getConfig().getStringList("Donation-Announcement")) {
-                player.sendMessage(Color.stringColor(message.replace("{player}", target.getName())));
+                player.sendMessage(TextUtils.color(message.replace("{player}", target.getName())));
                 break;
             }
         });

@@ -34,7 +34,7 @@ public class ChatFormatModule extends Module implements Listener {
 
         try {
             getPlugin().getServer().getPluginManager().getPlugin("LuckPerms");
-            getPlugin().getLogger().log(Level.INFO,"[Module] Loaded chat formatting module.");
+            getPlugin().getLogger().log(Level.INFO, "[Module] Loaded chat formatting module.");
         } catch (Exception ex) {
             getPlugin().getLogger().log(Level.SEVERE, "[Module] Chat formatting module is enabled without LuckPerms installed!");
             getPlugin().getServer().getPluginManager().disablePlugin(getPlugin());
@@ -43,7 +43,7 @@ public class ChatFormatModule extends Module implements Listener {
 
     @Override
     public void onDisable() {
-        getPlugin().getLogger().log(Level.INFO,"<green>[Module] Unloaded chat formatting module.");
+        getPlugin().getLogger().log(Level.INFO, "<green>[Module] Unloaded chat formatting module.");
     }
 
     @EventHandler
