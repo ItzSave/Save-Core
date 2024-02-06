@@ -3,7 +3,7 @@ package net.zithium.core.module.modules;
 
 import net.zithium.core.ZithiumCore;
 import net.zithium.core.module.Module;
-import net.zithium.library.utils.Color;
+import net.zithium.core.utils.TextUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -41,11 +41,14 @@ public class AnnouncerModule extends Module implements Runnable {
 
         size = broadcasts.size();
         if (size > 0)
-            broadcastTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(getPlugin(), this, 60L, config.getInt("Auto-Announcer.delay") * 20L);
+            // Convert minutes to ticks (20 ticks per second)
+            broadcastTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(getPlugin(), this,
+                    60L * config.getInt("Auto-Announcer.delay") * 20L,  // Delay in ticks
+                    60L * config.getInt("Auto-Announcer.delay") * 20L); // Repeat interval in ticks
 
         getPlugin().getLogger().info("[Module] Loaded auto announcer module");
-
     }
+
 
     @Override
     public void onDisable() {
@@ -57,7 +60,7 @@ public class AnnouncerModule extends Module implements Runnable {
     public void run() {
         if (count == size) count = 0;
         for (Player player : Bukkit.getOnlinePlayers()) {
-            broadcasts.get(count).forEach(message -> player.sendMessage(Color.stringColor(message)));
+            broadcasts.get(count).forEach(message -> player.sendMessage(TextUtils.color(message)));
         }
         count++;
     }

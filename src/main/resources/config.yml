@@ -58,8 +58,8 @@ Players:
 
 
 Auto-Announcer:
-  # The delay between announcements. (In Seconds)
-  delay: 800
+  # The delay between announcements. (In minutes)
+  delay: 5
 
   # Create your very own announcements here
   announcements:
